@@ -39,9 +39,27 @@ Tree3DField::~Tree3DField()
 {
 }
 
+// to do
+// optimize number of branches 
+// now there will be more rights
 bool Tree3DField::Add(TreePtr& another)
 {
-	
+auto pos =another.getPos();
+
+	if(*position == pos) {return false;} 
+auto closest = getClosestTo (pos) ;
+if(position == nullptr) {position = std::make_shared(another); return true ;} 
+if(&closest == this) { 
+if(left == nullptr) {
+left = std::make_shared<PosPtr>() ;
+return left.Add(another);
+}else{
+if(right == nullptr) {
+right = std::make_shared<PosPtr>();
+} 
+right.add(another);
+} 
+} 
 }
 
 bool Tree3DField::Search(TreePtr& search)
